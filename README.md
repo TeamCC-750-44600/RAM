@@ -1,2 +1,2 @@
 # RAM
-The RAm Chip Programs
+The RAM Chip Programs
