@@ -1,5 +1,6 @@
 //https://www.fastmetrics.com/support/it-wav-file/
 //https://www.arduino.cc/en/Tutorial/SimpleAudioPlayer?action=sourceblock&num=1
+//https://maxoffsky.com/maxoffsky-blog/how-to-play-wav-audio-files-with-arduino-uno-and-microsd-card/
 
 #include <LiquidCrystal.h>
 
@@ -58,7 +59,7 @@ delay (Rndm = random(1,10)*100);
 
 int count = 0;
 
-File myFile = SD.open("test.wav");
+File myFile = SD.open("RAMRecording.wav");
 const int S = 1024;
 short buffer [S];
 while (myFile.available()) { 
