@@ -5,6 +5,7 @@
 
 #include <SD.h>
 #include <SPI.h>
+#include <Audio.h>
 
 LiquidCrystal lcd (12, 11, 5, 4, 3, 2);
 
@@ -24,6 +25,7 @@ void setup() {
  pinMode(LEDfive, OUTPUT);
  randomSeed(analogRead (A0)); 
  Serial.begin (9600);
+ Audio.begin (88200, 100);
 }
 
 void loop() {
@@ -57,4 +59,19 @@ delay (Rndm = random(1,10)*100);
 int count = 0;
 
 File myFile = SD.open("test.wav");
+const int S = 1024;
+short buffer [S];
+while (myFile.available()) { 
+  myFile.read (buffer, sizeof (buffer));
+
+  int volume = 1024;
+  Audio.prepare (buffer, S, volume);
+  Audio.write (buffer, S);
+}
+}
+
+myFile.close();
+
+}
+
 }
