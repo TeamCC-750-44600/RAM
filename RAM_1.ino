@@ -10,35 +10,36 @@ Code by: Aarya Patel for the Creative Creatures Team :) :) :) !!!
 
 #include <LiquidCrystal.h>
 
-#include "SD.h"
+#include <SD.h>
 #define SD_ChipSelectPin 53
-#include "TMRpcm.h"
-#include "SPI.h"
+#include <TMRpcm.h>
+#include <SPI.h>
 
 TMRpcm tmrpcm;
 
-const int RS = 35, RW = 34, DB4 = 33, DB5 = 32, DB6 = 31, DB7 = 30;
-LiquidCrystal lcd (RS, RW, DB4, DB5, DB6, DB7);
+const int rs = 10, en = 9, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-#define LEDred 3
-#define LEDwhite 2
+#define LEDred 13
+#define LEDwhite 12
 
 long Rndm = 0;
 
 void setup() {
- lcd.begin(16, 2);
- lcd.print (" Help! Help Me! ");
+
  randomSeed(analogRead (0)); 
  Serial.begin (9600);
  pinMode (LEDred, OUTPUT);
  pinMode (LEDwhite, OUTPUT);
- tmrpcm.speakerPin = 9;
+ tmrpcm.speakerPin = 11;
  if (!SD.begin(SD_ChipSelectPin)) {
 Serial.println("SD fail");
 return;
  }
  tmrpcm.setVolume(6);
 tmrpcm.play("Final.wav");
+ lcd.begin(16, 2);
+ lcd.print ("Help Me!");
 }
 
 void loop() {
@@ -48,19 +49,19 @@ void loop() {
 //delay(300000);
 //Serial.println("SD Play");
 
-/*digitalWrite (LEDwhite, HIGH);
-delay (Rndm = random(1,10)*100);
-digitalWrite (LEDwhite, LOW);
-delay (Rndm = random(1,10)*100);
-delay (1000);
-digitalWrite (LEDred, HIGH);
-delay (Rndm = random(1,10)*100);
-digitalWrite (LEDred, LOW);
-delay (Rndm = random(1,10)*100);
-delay (1000);
 digitalWrite (LEDwhite, HIGH);
 delay (Rndm = random(1,10)*100);
 digitalWrite (LEDwhite, LOW);
 delay (Rndm = random(1,10)*100);
- int count = 0;*/
+//delay (1000);
+digitalWrite (LEDred, HIGH);
+delay (Rndm = random(1,10)*100);
+digitalWrite (LEDred, LOW);
+delay (Rndm = random(1,10)*100);
+//delay (1000);
+digitalWrite (LEDwhite, HIGH);
+delay (Rndm = random(1,10)*100);
+digitalWrite (LEDwhite, LOW);
+delay (Rndm = random(1,10)*100);
+ int count = 0;
 }
